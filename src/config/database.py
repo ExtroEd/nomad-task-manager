@@ -1,12 +1,20 @@
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-DATABASE_URL = "postgresql+asyncpg://postgres:qwerty@localhost:5432/task_manager_fastapi;"
+# Строка подключения для SQLite
+DATABASE_URL = "sqlite:///./test.db"  # Путь к базе данных SQLite
+
+# Создаем соединение с базой данных SQLite (без необходимости в дополнительных параметрах)
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+
+# Создаем SessionLocal для управления сессиями
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# Основной базовый класс для моделей
+Base = declarative_base()
 
 
-engine = create_async_engine(DATABASE_URL)
-
-new_session = async_sessionmaker(engine, expire_on_commit=False)
-
-async def get_session():
-    async with new_session() as session:
-        yield session
+# Функция для инициализации базы данных (создания таблиц)
+def init_db():
+    Base.metadata.create_all(bind=engine)
