@@ -18,3 +18,11 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+
+class UserSchema(BaseModel):
+    id: int
+    first_name: str
+    last_name: str
+    password: str
+    email: str

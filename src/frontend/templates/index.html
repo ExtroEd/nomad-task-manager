@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Task Manager</h1>
+
+      <!-- Форма для добавления задачи -->
+      <div class="task-input">
+        <input type="text" id="taskInput" placeholder="Enter a new task..." />
+        <button id="addTaskBtn">Add Task</button>
+      </div>
+
+      <!-- Список задач -->
+      <ul id="taskList" class="task-list">
+        <!-- Задачи будут добавляться сюда через JavaScript -->
+      </ul>
+    </div>
+
+    <script src="{{ url_for('static', path='js/app.js') }}"></script>
+      <!-- Атрибуция для иконки -->
+    <footer>
+        <p>
+            Icons created by <a href="https://www.flaticon.com/free-icons/testing" title="testing icons">Freepik - Flaticon</a>
+        </p>
+    </footer>
+  </body>
+</html>
